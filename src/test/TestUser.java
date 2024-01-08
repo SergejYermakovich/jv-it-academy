@@ -7,13 +7,7 @@ public class TestUser {
         user.addOrder("Pizza Pepperoni");
         user.addOrder("Water Mineral");
 
-
-
-
-
         user.processAllOrders();
-
-
 
     }
 }
