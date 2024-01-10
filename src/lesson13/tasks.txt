@@ -21,3 +21,5 @@
     Обработайте полученное исключение.
 4. IllegalArgumentException
 5. UnsupportedOperationException
+
+------------------------------------------------------------
