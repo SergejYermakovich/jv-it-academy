@@ -20,14 +20,27 @@ public class Forest {
     }
 
     private List<SomeTree> initTrees(int quantity) {
+        List<Leaf> lindenLeaves = initLeaves(100);
+
+
         for (int i = 0; i < quantity; i++) {
             if (i % 2 == 0) {
-                trees.add(new Linden());
+                trees.add(new Linden(lindenLeaves));
             } else {
-                trees.add(new Fir());
+                trees.add(new Fir(lindenLeaves));
             }
 
         }
         return trees;
+    }
+
+    private List<Leaf> initLeaves(int count) {
+        List<Leaf> leaves = new ArrayList<>();
+
+        for (int i = 0; i < count; i++) {
+            leaves.add(new Leaf());
+        }
+
+        return leaves;
     }
 }

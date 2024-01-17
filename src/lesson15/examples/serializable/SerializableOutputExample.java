@@ -8,13 +8,10 @@ public class SerializableOutputExample {
 
     public static void main(String[] args) {
 
-        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("person.dat")))
-        {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("person.dat"))) {
             Person p = new Person("Sam", 33, 178, true);
             oos.writeObject(p);
-        }
-        catch(Exception ex){
-
+        } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
     }
