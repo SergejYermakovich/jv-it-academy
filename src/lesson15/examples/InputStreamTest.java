@@ -8,22 +8,18 @@ import java.nio.file.Paths;
 
 public class InputStreamTest {
     public static void main(String[] args) throws IOException {
-
         InputStream inputStream = new FileInputStream("");
-
         Path path = Paths.get("test-path.txt");
 
         if (!Files.exists(path)) {
             Files.createFile(path);
         }
-
-//        path.
     }
 
     public static InputStream initStream() throws IOException {
         InputStream stream;
 
-        stream = new FileInputStream("");
+        stream = new FileInputStream("file.txt");
         stream = new URL("https://google.com/").openStream();
         stream = new ByteArrayInputStream(new byte[]{32, 89});
 
