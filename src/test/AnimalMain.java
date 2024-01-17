@@ -2,8 +2,9 @@ package test;
 
 public class AnimalMain {
     public static void main(String[] args) {
-        Dog dog = new Dog();
-        System.out.println();
+        System.out.println(args[0]); //
+//        Dog dog = new Dog();
+//        System.out.println();
 
     }
 

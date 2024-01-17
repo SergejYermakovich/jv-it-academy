@@ -1,0 +1,19 @@
+
+1) Создать class Forest который должен включать коллекцию деревьев Tree
+- abstract class SomeTree который должен включать коллекцию
+листьев Leaf( внутренний класс Leaf который должен иметь поле color),
+тип дерева TreeType (enum DECID, CONIF - deciduous and coniferous- лиственные хвойные)
+и имя дерева String name;
+- наследники класса SomeTree Linden(липа) и Fir(ель)
+2) Forest должен уметь инициализировать лес с заданным количеством деревьев
+3) Создать enum Seasons (SUMMER, AUTUMN, WINTER, SPRING)
+4) В конструкторе Forest инициировать цвет листьев с учетом сезона
+и количества листьев на деревьях
+для примера эта цифра одинаковая для всех деревьев
+- init (Map<TreeType, Integer> initForestData, Integer leafsNumber, Season season)
+- если leafsNumber < 1 throw new exception with message (можно написать свой exception)
+5) Forest должен уметь менять листьям цвет changeSeason(Season season)
+- yellow для осени
+- у деревьев не должно быть листьев зимой
+- light green для весны
+- green для лета

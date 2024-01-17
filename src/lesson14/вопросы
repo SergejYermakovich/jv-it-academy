@@ -1,0 +1,104 @@
+1. Что такое исключение в Java?
+2. Какие виды исключений существуют в Java?
+3. Как обрабатывать исключения в Java?
+4. Какие ключевые слова используются для обработки исключений в Java?
+5. Что такое try-catch блок и как он работает?
+6. Какие методы класса Throwable используются для работы с исключениями?
+
+
+package kz.hcb.hcbdocument.service.impl;
+
+import com.itextpdf.commons.utils.Base64;
+import kz.hcb.hcbdocument.dto.DocumentResponse;
+import kz.hcb.hcbdocument.dto.receipt.ReceiptPaymentsForeignSwiftRequest;
+import kz.hcb.hcbdocument.dto.reference.enums.FileFormat;
+
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.List;
+
+
+@ExtendWith(MockitoExtension.class)
+class ReceiptServiceImplTest {
+
+    private static final String RECEIPT_PAYMENTS_FOREIGN_SWIFT = "templates/receipt/receipt_payments_foreign_swift.html";
+
+    @InjectMocks
+    private ReceiptServiceImpl receiptService;
+
+    @Test
+    void generatePaymentsForeignSwiftReceiptWithPaymentDetails() throws IOException {
+        // given
+        ReceiptPaymentsForeignSwiftRequest request = getReceiptWithPaymentDetails();
+        String actual = readFile("file/receipt_with_payment_details.html");
+
+        // when
+        String expected = receiptService.parseThymeleafTemplate(
+                receiptService.getTemplateValues(request),
+                RECEIPT_PAYMENTS_FOREIGN_SWIFT);
+
+        // then
+        Assertions.assertEquals(expected, actual);}
+
+    @Test
+    void generatePaymentsForeignSwiftReceiptWithoutPaymentDetails() throws IOException {
+        // given
+        ReceiptPaymentsForeignSwiftRequest request = getReceiptWithoutPaymentDetails();
+        String actual = readFile("file/receipt_without_payment_details.html");
+
+        // when
+        String expected = receiptService.parseThymeleafTemplate(
+                receiptService.getTemplateValues(request),
+                RECEIPT_PAYMENTS_FOREIGN_SWIFT);
+
+        // then
+        Assertions.assertEquals(expected, actual);
+    }
+
+
+    private ReceiptPaymentsForeignSwiftRequest.ReceiptPaymentsForeignSwiftRequestBuilder generatePaymentsForeignSwiftReceipt() {
+        return ReceiptPaymentsForeignSwiftRequest.builder()
+                .referenceNumber("123 - 456")
+                .bankOperationCode("CRED")
+                .valueDateCurrencyAmount("230706EUR8000,00")
+                .sender("""
+                        :50K:/KZ29886A220120384910,
+                        KNOL DENIS,
+                        ID016854255DD 20040910,
+                        ALMATY, KZ
+                        """)
+                .intermediaryBankCorrespondentAccount(":53B:/30111810700000000016")
+                .beneficiaryBank(":57A:DEUTZAJXGFX")
+                .beneficiary("""
+                        :59:/KZ24886A220120382187,
+                        Homestaff Intl, LLC,
+                        Berlin, DE
+                        """)
+                .remittanceInfo(":70:/INV/RECHNUNGSNUMMER 018 RECHNUNGSDATU28.12.2022M")
+                .detailsOfCharge(":71A:SHA");
+    }
+
+    private ReceiptPaymentsForeignSwiftRequest getReceiptWithPaymentDetails() {
+       return generatePaymentsForeignSwiftReceipt()
+                .paymentDetails(":72:/RPP/001.231115.5.ELEK")
+                .build();
+    }
+
+    private ReceiptPaymentsForeignSwiftRequest getReceiptWithoutPaymentDetails() {
+        return  generatePaymentsForeignSwiftReceipt().build();
+    }
+
+    protected String readFile(final String fileName) throws IOException {
+        final Path path = Path.of(getClass().getClassLoader().getResource(fileName).getPath());
+        return Files.readString(path);
+    }
+
+}
