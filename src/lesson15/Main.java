@@ -1,9 +1,6 @@
 package lesson15;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
 
 
 // !3 = 3 * 2 * 1 = 6 = 3 * !2
@@ -11,6 +8,8 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println(factorial(3));
+        File root = new File("D:/rebase");
+        FileFinder.printFiles(root);
     }
 
 
