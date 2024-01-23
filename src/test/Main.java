@@ -6,14 +6,34 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        final  String INPUT = "I am a magic string.";
-        final  String INPUT2 = "I am a magic string.";
+        Thread t1 = new Thread(() -> {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
 
 
-         byte[] ARRAY1 = INPUT.getBytes();
-         byte[] ARRAY2 = INPUT2.getBytes();
+        Thread t2 = new Thread(() -> {
+            synchronized (t1) {
+                t1.start();
+                try {
+                    t1.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-        System.out.println(Arrays.equals(ARRAY1, ARRAY2));
+        t2.start();
+
+        Thread.State t1State = t1.getState();
+        Thread.State t2State = t2.getState();
+
+        System.out.println("t1 state: " + t1State);
+        System.out.println("t2 state: " + t2State);
+
     }
 
 

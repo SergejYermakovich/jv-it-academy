@@ -10,7 +10,7 @@ public class DeadlockExample {
                 System.out.println("Thread 1: Locked resource 1");
 
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
@@ -22,16 +22,16 @@ public class DeadlockExample {
         });
 
         Thread thread2 = new Thread(() -> {
-            synchronized (resource2) {
+            synchronized (resource1) {
                 System.out.println("Thread 2: Locked resource 1");
 
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
 
-                synchronized (resource1) {
+                synchronized (resource2) {
                     System.out.println("Thread 2: Locked resource 2");
                 }
             }

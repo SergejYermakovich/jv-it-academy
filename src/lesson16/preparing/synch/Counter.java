@@ -7,7 +7,6 @@ public class Counter {
         synchronized (Counter.class) {
             count++;
         }
-
     }
 
     public int getCount() {
