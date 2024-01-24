@@ -1,30 +1,42 @@
-package lesson16.preparing;
+package lesson16.preparing.waitAndNotify;
+
+import java.util.Arrays;
+import java.util.Random;
 
 public class WaitExample {
     public static void main(String[] args) throws InterruptedException {
-        final Object lock = new Object();
+
+        final int[] buffer = new int[5];
+        final Random random = new Random();
 
         Thread t1 = new Thread(new Runnable() {
             @Override
             public void run() {
-                synchronized (lock) {
+                synchronized (buffer) {
                     try {
                         System.out.println("Thread 1 is waiting");
-                        lock.wait(); // по  ток ожидает вызова notify()
+                        buffer.wait(); // по  ток ожидает вызова notify()
                         System.out.println("Thread 1 is awake");
                     } catch (InterruptedException ignored) {
 
                     }
                 }
+
+                System.out.println("Thread 1:");
+                System.out.println(Arrays.toString(buffer));
             }
         });
 
         Thread t2 = new Thread(new Runnable() {
             @Override
             public void run() {
-                synchronized (lock) {
+                synchronized (buffer) {
                     System.out.println("Thread 2 is running");
-                    lock.notify(); // вызываем notify(), чтобы разбудить поток t1
+
+                    for (int i = 0; i < buffer.length; i++) {
+                        buffer[i] = random.nextInt(10);
+                    }
+                    buffer.notify(); // вызываем notify(), чтобы разбудить поток t1
                 }
             }
         });
