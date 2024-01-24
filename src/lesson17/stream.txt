@@ -1,0 +1,80 @@
+Давайте рассмотрим каждую из функций Java Stream API подробнее:
+
+1. map: Промежуточная функция map принимает функцию и применяет её к каждому элементу потока, возвращая новый поток с результатами преобразования. Например:
+      List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
+   List<String> upperCaseNames = names.stream()
+       .map(String::toUpperCase)
+       .collect(Collectors.toList());
+   // Результат: ["ALICE", "BOB", "CHARLIE"]
+
+
+2. filter: Промежуточная функция filter принимает предикат (функцию, возвращающую булево значение) и возвращает поток, содержащий только те элементы, для которых предикат вернул true. Например:
+      List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
+   List<String> longNames = names.stream()
+       .filter(name -> name.length() > 5)
+       .collect(Collectors.toList());
+   // Результат: ["Charlie"]
+
+
+3. sorted: Промежуточная функция sorted сортирует элементы потока в соответствии с заданным компаратором или в естественном порядке для типа элементов. Например:
+      List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
+   List<String> sortedNames = names.stream()
+       .sorted()
+       .collect(Collectors.toList());
+   // Результат: ["Alice", "Bob", "Charlie"]
+
+
+4. distinct: Промежуточная функция distinct возвращает поток, содержащий только уникальные элементы (без повторений). Например:
+      List<Integer> numbers = Arrays.asList(1, 2, 3, 2, 4);
+   List<Integer> uniqueNumbers = numbers.stream()
+       .distinct()
+       .collect(Collectors.toList());
+   // Результат: [1, 2, 3, 4]
+
+
+5. limit: Промежуточная функция limit возвращает поток, содержащий не более указанного количества элементов. Например:
+      List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+   List<Integer> limitedNumbers = numbers.stream()
+       .limit(3)
+       .collect(Collectors.toList());
+   // Результат: [1, 2, 3]
+
+
+давайте рассмотрим несколько терминальных функций:
+
+1. forEach: Терминальная функция forEach выполняет заданное действие для каждого элемента потока. Например:
+      List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
+   names.stream()
+       .forEach(System.out::println);
+   // Результат: выводит каждое имя на экран
+
+
+2. collect: Терминальная функция collect преобразует элементы потока в другую структуру данных (например, список, множество или карту). Например:
+      List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
+   Set<String> nameSet = names.stream()
+       .collect(Collectors.toSet());
+   // Результат: {"Alice", "Bob", "Charlie"}
+
+
+3. reduce: Терминальная функция reduce объединяет элементы потока с помощью указанной функции. Это может быть использовано для вычисления суммы, нахождения максимального/минимального значения и т.д. Например:
+      List<Integer> numbers = Arrays.asList(1, 2, 3, 4);
+   int sum = numbers.stream()
+       .reduce(0, Integer::sum);
+   // Результат: 10 (сумма всех чисел)
+
+
+4. count: Терминальная функция count возвращает количество элементов в потоке. Например:
+      List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
+   long count = names.stream()
+       .count();
+   // Результат: 3
+
+
+5. anyMatch, allMatch, noneMatch: Терминальные функции anyMatch, allMatch и noneMatch проверяют соответствие элементов потока заданному условию и возвращают булево значение. Например:
+      List<Integer> numbers = Arrays.asList(1, 2, 3, 4);
+   boolean anyMatchGreaterThanThree = numbers.stream()
+       .anyMatch(num -> num > 3);
+   // Результат: true (так как есть элемент больше 3)
+
+
+Это лишь небольшой обзор терминальных функций в Java Stream API. Каждая из них предоставляет удобные способы завершения обработки данных в потоке и получения результата
