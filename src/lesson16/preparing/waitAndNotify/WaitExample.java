@@ -7,6 +7,8 @@ public class WaitExample {
     public static void main(String[] args) throws InterruptedException {
 
         final int[] buffer = new int[5];
+
+
         final Random random = new Random();
 
         Thread t1 = new Thread(new Runnable() {
@@ -15,7 +17,7 @@ public class WaitExample {
                 synchronized (buffer) {
                     try {
                         System.out.println("Thread 1 is waiting");
-                        buffer.wait(); // по  ток ожидает вызова notify()
+                        buffer.wait(); // поток ожидает вызова notify()
                         System.out.println("Thread 1 is awake");
                     } catch (InterruptedException ignored) {
 
@@ -36,6 +38,9 @@ public class WaitExample {
                     for (int i = 0; i < buffer.length; i++) {
                         buffer[i] = random.nextInt(10);
                     }
+
+
+                    System.out.println("Thread 2 is notifying....");
                     buffer.notify(); // вызываем notify(), чтобы разбудить поток t1
                 }
             }

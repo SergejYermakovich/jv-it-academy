@@ -6,14 +6,24 @@ public class Main {
         thread1.start();
 
 
-        Runnable threadRunnableExample = new ThreadRunnableExample();
-        Thread thread2 = new Thread(threadRunnableExample, "threadRunnable name");
+        Runnable threadRunnableExample = new Runnable() {
+            @Override
+            public void run() {
+                for (int i = 0; i < 10; i++) {
+                    System.out.println(Thread.currentThread().getName() + ": " + i);
+                }
+            }
+        };
+
+
+
+        Thread thread2 = new Thread(threadRunnableExample);
         thread2.start();
 
 
 
-        for (int i = 0; i < 10; i++) {
-            System.out.println(Thread.currentThread().getName() + ": " + i);
-        }
+//        for (int i = 0; i < 10; i++) {
+//            System.out.println(Thread.currentThread().getName() + ": " + i);
+//        }
     }
 }

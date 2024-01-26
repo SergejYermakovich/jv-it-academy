@@ -9,5 +9,16 @@ public class TestUser {
 
         user.processAllOrders();
 
+
+
+        System.out.println(assertInstanceOf(3333));
+
+    }
+
+    private static Integer assertInstanceOf(Number cause) {
+        if (cause instanceof Integer serviceException) {
+            return serviceException;
+        }
+        return 1;
     }
 }
