@@ -1,0 +1,6 @@
+Callable task - в которой мы вычисляем сумму нечетных элементов и возвращаем результат.
+ExecutorService executorService используем, который подходит под данную задачу.
+
+ExecutorService executorService = ...
+
+Callable<Integer> task = ...

@@ -6,20 +6,22 @@ public class ThreadExample {
     public static void main(String[] args) {
         int[] array = populateArray();
 
+        FirstHalfCalculatorThread firstThread = new FirstHalfCalculatorThread(array);
+        firstThread.start();
 
-        FirstHalfCalculatorThread firstHalfCalculatorThread = new FirstHalfCalculatorThread(array);
-        firstHalfCalculatorThread.start();
+        SecondHalfCalculatorThread secondThread = new SecondHalfCalculatorThread(array);
+        secondThread.start();
 
 
     }
 
     static int[] populateArray() {
-        int[] array = new int[10000000];
+        int[] array = new int[5];
 
         Random random = new Random();
 
         for (int i = 0; i < array.length; i++) {
-            array[i] = random.nextInt(100);
+            array[i] = random.nextInt(10);
         }
 
         return array;

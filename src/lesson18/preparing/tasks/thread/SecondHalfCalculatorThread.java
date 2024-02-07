@@ -1,18 +1,18 @@
 package lesson18.preparing.tasks.thread;
 
-public class FirstHalfCalculatorThread extends Thread {
+public class SecondHalfCalculatorThread extends Thread {
+
     private final int[] array;
 
-    public FirstHalfCalculatorThread(int[] array) {
+    public SecondHalfCalculatorThread(int[] array) {
         this.array = array;
     }
 
     @Override
     public void run() {
         int sum = 0;
-        for (int i = 0; i < array.length / 2; i++) {
+        for (int i = array.length / 2; i < array.length; i++) {
             sum += array[i];
-
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -20,6 +20,6 @@ public class FirstHalfCalculatorThread extends Thread {
             }
         }
 
-        System.out.println("first half = " + sum);
+        System.out.println("Second half = " + sum);
     }
 }
