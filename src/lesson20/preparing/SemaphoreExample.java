@@ -28,8 +28,20 @@ public class SemaphoreExample {
             }
         });
 
+        Thread thread3 = new Thread(() -> {
+            try {
+                semaphore.acquire(); // захватываем разрешение
+                System.out.println("Thread 3 is working");
+                Thread.sleep(2000);
+                semaphore.release(); // освобождаем разрешение
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+
         thread1.start();
         thread2.start();
+        thread3.start();
 
     }
 }

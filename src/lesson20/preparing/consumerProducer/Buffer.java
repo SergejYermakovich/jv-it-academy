@@ -1,4 +1,4 @@
-package lesson20.preparing;
+package lesson20.preparing.consumerProducer;
 
 public class Buffer {
     private int messageCount = 0;
@@ -8,6 +8,11 @@ public class Buffer {
                 wait();
             } catch (InterruptedException e) { /* ... */ }
         }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         messageCount--;
         notifyAll();
     }
@@ -16,6 +21,11 @@ public class Buffer {
             try {
                 wait();
             } catch (InterruptedException e) { /* ... */ }
+        }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
         messageCount++;
         notifyAll();
