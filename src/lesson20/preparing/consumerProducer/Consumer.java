@@ -1,4 +1,4 @@
-package lesson20.preparing;
+package lesson20.preparing.consumerProducer;
 
 import lesson20.preparing.consumerProducer.Buffer;
 

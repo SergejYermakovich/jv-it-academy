@@ -1,0 +1,53 @@
+1) Ввести номер месяца текущего года и вывести все даты в формате d::MMM::uuuu:
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите номер месяца текущего года: ");
+        int month = scanner.nextInt();
+
+        LocalDate date = LocalDate.now().withMonth(month);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d::MMM::uuuu");
+
+        while (date.getMonthValue() == month) {
+            System.out.println(date.format(formatter));
+            date = date.plusDays(1);
+        }
+    }
+}
+
+
+2) Вывести расписание всех встреч, которые происходят еженедельно в 13:00 в течение 2 месяцев:
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
+public class Main {
+    public static void main(String[] args) {
+        LocalDate currentDate = LocalDate.now();
+        LocalTime time = LocalTime.of(13, 0);
+        LocalDate endDate = currentDate.plusMonths(2);
+
+        while (currentDate.isBefore(endDate)) {
+            System.out.println(currentDate.format(DateTimeFormatter.ofPattern("d::MMM::uuuu")) + " " + time);
+            currentDate = currentDate.plusWeeks(1);
+        }
+    }
+}
+
+
+3) Вывести на экран дату, которая была 60 дней назад от текущей даты:
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class Main {
+    public static void main(String[] args) {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate date60DaysAgo = currentDate.minusDays(60);
+
+        System.out.println("Дата 60 дней назад: " + date60DaysAgo.format(DateTimeFormatter.ofPattern("d::MMM::uuuu")));
+    }
+}

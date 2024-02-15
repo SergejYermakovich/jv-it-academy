@@ -1,6 +1,8 @@
 package lesson20.preparing;
 
 import lesson20.preparing.consumerProducer.Buffer;
+import lesson20.preparing.consumerProducer.Consumer;
+import lesson20.preparing.consumerProducer.Producer;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
