@@ -9,34 +9,24 @@ public class FileInputStreamExample {
     public static void main(String[] args) throws IOException {
 
         try (FileInputStream inputStream = new FileInputStream("message.txt")) {
-            int i;
-            while ((i = inputStream.read()) != -1) {
-                System.out.print((char) i);
+            int charSymbol = inputStream.read();
+            while (charSymbol != -1) {
+                System.out.print((char) charSymbol);
+                charSymbol = inputStream.read();
             }
         } catch (FileNotFoundException e) {
             System.out.println("file not found.....");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
 
-
-        try (FileInputStream inputStream = new FileInputStream("message.txt")) {
-            int i;
-            while ((i = inputStream.read()) != -1) {
-                System.out.print((char) i);
-            }
-        } catch (IOException e) {
-            System.out.println("file does not exist....");
-        }
-
-
-        FileReader fileReader = new FileReader("message.txt");
-
-        int symbol = fileReader.read();
-        while (symbol != -1) {
-            System.out.print((char) symbol);
-            symbol = fileReader.read();
-        }
+//
+//
+//        FileReader fileReader = new FileReader("message.txt");
+//
+//        int symbol = fileReader.read();
+//        while (symbol != -1) {
+//            System.out.print((char) symbol);
+//            symbol = fileReader.read();
+//        }
 
     }
 }
