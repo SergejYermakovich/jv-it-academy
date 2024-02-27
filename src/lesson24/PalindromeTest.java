@@ -5,7 +5,7 @@ public class PalindromeTest {
         // "Хил, худ, а дух лих." -> "хил, худ, а дух лих." -> "хилхудадухлих"
 
         System.out.println(isPalindrome("Хил, худ, а дух лих.") == true);
-        System.out.println(isPalindrome("1Хил, а дух лих.") == true);
+        System.out.println(isPalindrome("1Хил, а дух лих.") == false);
     }
 
     private static boolean isPalindrome(String checkString) {
@@ -19,6 +19,7 @@ public class PalindromeTest {
             }
         }
 
-        return result.reverse().toString().equals(result.toString());
+        String resultString = result.toString();
+        return resultString.contentEquals(result.reverse());
     }
 }
