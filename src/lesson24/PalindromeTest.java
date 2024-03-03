@@ -4,8 +4,8 @@ public class PalindromeTest {
     public static void main(String[] args) {
         // "Хил, худ, а дух лих." -> "хил, худ, а дух лих." -> "хилхудадухлих"
 
-        System.out.println(isPalindrome("Хил, худ, а дух лих.") == true);
-        System.out.println(isPalindrome("1Хил, а дух лих.") == false);
+        System.out.println(isPalindrome("Хил, худ, а дух лих."));
+        System.out.println(isPalindrome("1Хил, а дух лих."));
     }
 
     private static boolean isPalindrome(String checkString) {
@@ -19,7 +19,12 @@ public class PalindromeTest {
             }
         }
 
-        String resultString = result.toString();
-        return resultString.contentEquals(result.reverse());
+        StringBuilder reverseWord = new StringBuilder();
+
+        for (int i = result.length() - 1; i >= 0; i--) {
+            reverseWord.append(result.charAt(i));
+        }
+
+        return reverseWord.toString().equals(result.toString());
     }
 }
